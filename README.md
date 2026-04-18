@@ -36,3 +36,30 @@ Create the script file:
 
 ```bash
 sudo nano /usr/local/bin/renew-certbot-nginx-container.sh
+```
+
+---
+
+## Cron Job
+To execute the script every day at 03:00 AM Dubai time, open root crontab:
+
+```bash
+sudo crontab -e
+```
+Add:
+
+```bash
+CRON_TZ=Asia/Dubai
+0 3 * * * /usr/local/bin/renew-certbot-nginx-container.sh >> /var/log/renew-certbot-nginx-container.log 2>&1
+```
+This will:
+
+- run the script daily at 03:00 AM
+- use Dubai timezone
+- append logs to:
+
+```bash
+/var/log/renew-certbot-nginx-container.log
+
+```
+
